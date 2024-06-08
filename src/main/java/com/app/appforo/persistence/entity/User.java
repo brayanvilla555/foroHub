@@ -19,5 +19,10 @@ public class User {
     private String username;
     private String password;
 
+    //podria pedir Get and Set
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
     //crear el id profile
 }
