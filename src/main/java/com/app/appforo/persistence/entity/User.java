@@ -32,7 +32,6 @@ public class User implements UserDetails {
     private boolean credentialsExpired;
     private boolean enabled;
 
-    //podria pedir Get and Set
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
@@ -67,12 +66,12 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.accountLocked;
+        return !this.accountLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return this.credentialsExpired;
+        return !this.credentialsExpired;
     }
 
     @Override

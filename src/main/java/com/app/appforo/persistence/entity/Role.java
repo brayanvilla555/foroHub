@@ -15,7 +15,6 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Role implements GrantedAuthority {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,8 +34,7 @@ public class Role implements GrantedAuthority {
         return "ROLE_" + name.name();
     }
 
-
-    private static enum RoleEnum{
+    public static enum RoleEnum{
         EDITOR, ADMIN
     }
 
