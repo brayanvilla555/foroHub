@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -20,6 +21,9 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public Page<UserDto> findAll(Pageable pageable) {
@@ -35,7 +39,8 @@ public class UserServiceImpl implements UserService {
         if(user == null || user.getId() != null){
             throw new IllegalArgumentException("En la peticion no estás mandando el mody");
         }
-
+        String passwordEncript = passwordEncoder.encode(user.getPassword());
+        user.setPassword(passwordEncript);
         //encriptar la contraseña
         return UserMapper.toUserDto(userRepository.save(user));
     }
